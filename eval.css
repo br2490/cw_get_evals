@@ -1,0 +1,55 @@
+
+
+
+
+body
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 70%;
+	color: #555;
+	background: #fff;
+}
+
+
+table { margin: 0}
+
+td
+{
+	margin: 0;
+	font-size: 80%;
+	padding: 0 0 5px 0;
+	color: #555;
+	line-height: 130%;
+	border-bottom: 1px solid #eee;
+	
+}
+
+
+th
+{
+	border-bottom: 2px solid #eee;
+	padding-bottom: .5em;
+	color: #686868;
+	font-weight: 600;
+	font-size: 75%;
+	text-align: center;
+	
+}
+
+
+
+
+.bluetbl {border : solid 2px #86C5FE; background-color:#E7F4FF;}
+.bluerow {background-color:#CEE8FF;}
+.bluetd {border-bottom: 1px solid #86C5FE;}
+
+.graytbl {border : solid 1px #C0C0C0; background-color:#FFFFFF;}
+.grayrow {background-color:#eee;}
+.grayline {border-bottom: 2px solid #C0C0C0;}
+.graybottom {border-bottom: 4px solid #C0C0C0;}
+
+.status {font-size:14px;  font-weight:bold; color:#565656; letter-spacing:1px; margin-bottom:5px;}
+
+input {font-family: Verdana, Arial, Helvetica, sans-serif;	font-size: 95%; color:#555;font-weight:bold;}
+option {font-family: Verdana, Arial, Helvetica, sans-serif;	font-size: 95%; color:#555;}
+select {font-family: Verdana, Arial, Helvetica, sans-serif;	font-size: 95%; color:#555;}
