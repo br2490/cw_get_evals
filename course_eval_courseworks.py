@@ -6,7 +6,6 @@ import pdfkit
 
 
 def get_evaluation(login_uni, password, instructors_uni):
-
     payload = {
         '_username': login_uni,
         '_password': password
@@ -25,7 +24,7 @@ def get_evaluation(login_uni, password, instructors_uni):
 
     eval_url = 'https://courseworks.columbia.edu/portal/tool/3b923cb5-ed21-4340-9273-67f4569a3c2d' \
                '/report_search_archive?startSearch=&instructor='
-    
+
     url = ''.join([eval_url, instructors_uni])
     results = c.get(url)
 
@@ -41,15 +40,15 @@ def get_evaluation(login_uni, password, instructors_uni):
     filtered_list = [cell for cell in evaluation_xpaths if cell not in junk_values]
     master_eval_list = [filtered_list[x:x + 7] for x in range(0, len(filtered_list), 7)]
 
-    # We purposefully left some unnecessary characters in our master list which will help us set the course title
-    # of courses with multiple evaluations. We need this so we know how to name the file!
-    last_title = ''
-
     # Make a directory to throw up in.
     try:
         os.stat(instructors_uni)
     except:
         os.mkdir(instructors_uni)
+
+    # We purposefully left some unnecessary characters in our master list which will help us set the course title
+    # of courses with multiple evaluations. We need this so we know how to name the file!
+    last_title = ''
 
     for evaluation_row in master_eval_list:
         if evaluation_row[0] != '\n\t\t\t\t\t\t\n\t\t\t\t\t':
@@ -83,4 +82,4 @@ def fetch_and_save_evaluations(evaluation_row, c, instructors_uni):
         'quiet': ''
     }
 
-    pdfkit.from_string(evaluation.text, instructors_uni+'/'+filename, options=options, css='eval.css')
+    pdfkit.from_string(evaluation.text, instructors_uni + '/' + filename, options=options, css='eval.css')
