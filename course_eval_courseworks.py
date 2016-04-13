@@ -76,21 +76,25 @@ def get_evaluation(login_uni, password, instructors_uni):
         else:
             evaluation_row[0] = last_title
 
-        # Finally we kick our row to the fetcher and saver function for -this- evaluation row.
-        fetch_and_save_evaluations(evaluation_row, webworker, instructors_uni)
+    # Finally we kick our row to the fetcher and saver function for -this- evaluation row.
+    fetch_and_save_evaluations(evaluation_row, webworker, instructors_uni)
+
     print('All reports have been saved.')
 
 
-def fetch_and_save_evaluations(evaluation_row, c, instructors_uni):
+def fetch_and_save_evaluations(evaluation_row, webworker, instructors_uni):
     sep_char = '-'
     ext_char = '.pdf'
     instructor_eval = ''.join([sep_char, evaluation_row[4]]) if evaluation_row[4] != ' ' else ''
     filename = ''.join([evaluation_row[0], sep_char, evaluation_row[3], sep_char,
                         evaluation_row[2], instructor_eval, ext_char])
     fetch_url = evaluation_row[5]
-    evaluation = c.get(fetch_url)
 
     print('Getting evaluation: ' + filename)
+    evaluation = webworker.get(fetch_url)
+    if evaluation.status_code != 200:
+        print('Error: Failed to fetch: ' + filename)
+        return
 
     options = {
         'page-size': 'Letter',
