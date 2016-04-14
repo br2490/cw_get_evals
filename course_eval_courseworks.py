@@ -52,7 +52,10 @@ def get_evaluation(login_uni, password, instructors_uni):
     # Get our evaluation xpaths - we need to know the data about the row and the URL to fetch the evaluation.
     evaluation_xpaths = evaluations_xml.xpath('//tr[contains(@class,"search-result-table-row")]/td//text() | '
                                               '//tr[contains(@class,"search-result-table-row")]/td//a/@href')
-
+    if (evaluation_xpaths == '') :
+        print('Error: Found no reports for UNI ' + instructors_uni)
+        sys.exit(1)
+    
     # Now we need to parse our the unnecessary line return and tab characters.
     # and build a composite list that has each evaluation in its own list, within our master list.
     junk_values = '\n\t\t\t\t\t\t'
@@ -76,8 +79,8 @@ def get_evaluation(login_uni, password, instructors_uni):
         else:
             evaluation_row[0] = last_title
 
-    # Finally we kick our row to the fetcher and saver function for -this- evaluation row.
-    fetch_and_save_evaluations(evaluation_row, webworker, instructors_uni)
+        # Finally we kick our row to the fetcher and saver function for -this- evaluation row.
+        fetch_and_save_evaluations(evaluation_row, webworker, instructors_uni)
 
     print('All reports have been saved.')
 
